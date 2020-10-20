@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -34,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ResourcesWindow resourcesWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -53,7 +55,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public MainWindow(Stage primaryStage, Logic logic) throws IOException {
         super(FXML, primaryStage);
 
         // Set dependencies
@@ -66,6 +68,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        resourcesWindow = new ResourcesWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -144,6 +148,15 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.show();
         } else {
             helpWindow.focus();
+        }
+    }
+
+    @FXML
+    public void handleResources() throws IOException {
+        if (!resourcesWindow.isShowing()) {
+            resourcesWindow.show();
+        } else {
+            resourcesWindow.focus();
         }
     }
 
